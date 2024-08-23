@@ -12,15 +12,20 @@ function createCell () {
 }
 
 //funzione per generare un numero casuale da 1 a 100
-function getRandomNumber (min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
-}
+// function getRandomNumber (min, max) {
+//     return Math.floor(Math.random() * (max - min + 1) ) + min;
+// }
 
 //generare le celle al click del bottone
 playBtn.addEventListener('click', function() {
     for(let i = 0; i < 100; i++) {
         //genero cento celle
         const cell = createCell();
-    grid.appendChild(cell);
+    
+        //inserire il numero nella cella
+        cell.innerText = i + 1;
+    
+        //inserisco le celle nella griglia
+        grid.appendChild(cell);
     }
 })
