@@ -2,7 +2,9 @@
 //recupero gli elementi dal DOM
 const playBtn = document.getElementById('play');
 const grid = document.getElementById('grid');
-
+const rows = 10;
+const cols = 10;
+const totalCells = rows * cols
 
 // # Funzioni
 //funzione per creare una cella
@@ -14,7 +16,7 @@ function createCell () {
 
 //generare le celle al click del bottone
 playBtn.addEventListener('click', function() {
-    for(let i = 0; i < 100; i++) {
+    for(let i = 0; i < totalCells; i++) {
         //genero cento celle
         const cell = createCell();
         
