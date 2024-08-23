@@ -21,5 +21,6 @@ playBtn.addEventListener('click', function() {
     for(let i = 0; i < 100; i++) {
         //genero cento celle
         const cell = createCell();
+    grid.appendChild(cell);
     }
 })
