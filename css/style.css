@@ -1,0 +1,41 @@
+/*css reset*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* # utilities*/
+
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.bg-lightgreen {
+    background-color: #7FFFD4;
+}
+
+/*margin*/
+
+.mr-x {
+    margin: 0 20px;
+}
+
+/* # generals*/
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+main {
+    height: 800px;
+}
+
+/*header*/
