@@ -36,6 +36,30 @@ header {
 
 main {
     height: 800px;
+    padding: 40px;
 }
 
-/*header*/
+#grid {
+    margin: 0 auto;
+    border: 2px solid black;
+    height: 700px;
+    width: 700px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.cell {
+    border: 2px solid black;
+    height: calc(100% / 10);
+    width: calc(100% / 10);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clicked {
+    background-color: dodgerblue;
+    color: white
+}
