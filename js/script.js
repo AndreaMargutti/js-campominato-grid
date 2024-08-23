@@ -14,6 +14,7 @@ function createCell () {
     return cell;
 }
 
+//# Fase di elaborazione
 //generare le celle al click del bottone
 playBtn.addEventListener('click', function() {
     for(let i = 0; i < totalCells; i++) {
@@ -30,6 +31,7 @@ playBtn.addEventListener('click', function() {
         const cellNumber = i;
         cell.innerText = cellNumber + 1;
     
+        // # Fase di output
         //inserisco le celle nella griglia
         grid.appendChild(cell);
     }
