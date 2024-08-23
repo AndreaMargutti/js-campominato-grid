@@ -3,6 +3,7 @@
 const playBtn = document.getElementById('play');
 const grid = document.getElementById('grid');
 
+
 // # Funzioni
 //funzione per creare una cella
 function createCell () {
@@ -11,19 +12,21 @@ function createCell () {
     return cell;
 }
 
-//funzione per generare un numero casuale da 1 a 100
-// function getRandomNumber (min, max) {
-//     return Math.floor(Math.random() * (max - min + 1) ) + min;
-// }
-
 //generare le celle al click del bottone
 playBtn.addEventListener('click', function() {
     for(let i = 0; i < 100; i++) {
         //genero cento celle
         const cell = createCell();
+        
+        //colorariamo la cella al click e facciamo un log del suo numero
+        cell.addEventListener('click', function() {
+            cell.classList.toggle('clicked');
+            console.log(cellNumber)
+        })
     
         //inserire il numero nella cella
-        cell.innerText = i + 1;
+        const cellNumber = i;
+        cell.innerText = cellNumber + 1;
     
         //inserisco le celle nella griglia
         grid.appendChild(cell);
