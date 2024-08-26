@@ -1,11 +1,9 @@
 // # Fase di preparazione
 //recupero gli elementi dal DOM
 const form = document.querySelector('form');
+const difficulty = document.querySelector('select');
 const playBtn = document.getElementById('play');
 const grid = document.getElementById('grid');
-const rows = 10;
-const cols = 10;
-const totalCells = rows * cols
 
 // # Funzioni
 //funzione per creare una cella
@@ -21,6 +19,31 @@ function createCell () {
 form.addEventListener('submit', function(event) {
     //prevengo il caricamento
     event.preventDefault();
+    
+    let rows = 10;
+    let cols = 10;
+
+    //cambio alla difficoltà
+    const level = difficulty.value;
+    
+    switch(level) {
+        case 'normal':
+            rows = 9
+            cols = 9
+            break;
+        case 'hard':
+            rows = 7
+            cols = 7
+            break;
+    }
+            
+    const totalCells = rows * cols
+
+    //metto la classe corrispondente alla girglia
+        //metto la classe giusta alla griglia
+        grid.classList.remove('hard', 'normal', 'easy');
+        grid.classList.add(level);
+
     //svuoto la griglia
     grid.innerHTML = '';
     for(let i = 0; i < totalCells; i++) {
