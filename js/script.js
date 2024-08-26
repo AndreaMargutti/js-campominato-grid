@@ -38,13 +38,12 @@ function endGame (score, bombs, hasWon = false,) {
     } else {
         result = 'perso'
     }
-    console.log(`Hai ${result}! Il tuo punteggio è di ${score}`);
+    alert(`Hai ${result}! Il tuo punteggio è di ${score}`);
     isOver = true;
     
     // # coloriamo tutte le celle a fine partita
     //recupero le celle
     const cells = document.querySelectorAll('.cell');
-    console.log(cells);
     //recupero le singole celle
     for(let i = 0; i < cells.length; i++){
         const cell = cells[i];
