@@ -17,6 +17,8 @@ function createCell () {
 //# Fase di elaborazione
 //generare le celle al click del bottone
 playBtn.addEventListener('click', function() {
+    //svuoto la griglia
+    grid.innerHTML = '';
     for(let i = 0; i < totalCells; i++) {
         //genero cento celle
         const cell = createCell();
