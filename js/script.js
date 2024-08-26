@@ -5,6 +5,7 @@ const difficulty = document.querySelector('select');
 const playBtn = document.getElementById('play');
 const grid = document.getElementById('grid');
 const scoreCounter = document.getElementById('score');
+let isOver = false;
 
 // # Funzioni
 //funzione per creare una cella
@@ -26,6 +27,19 @@ function getRandomNumber (totalBombs, totalCells) {
     
     //tiro fuori l'array di bombe
     return bombs;
+}
+
+
+//funzione di end game
+function endGame (score, hasWon = false) {
+    let result;
+    if(hasWon){
+        result = 'vinto'
+    } else {
+        result = 'perso'
+    }
+    console.log(`Hai ${result}! Il tuo punteggio è di ${score}`);
+    isOver = true;
 }
 
 //funzione di inizio giocp
@@ -52,7 +66,8 @@ function startGame (event) {
     }
             
     const totalCells = rows * cols
-    const totalBombs = 16;
+    const totalBombs = 1;
+    const maxScore = totalCells - totalBombs;
             
     //metto la classe corrispondente alla girglia
     //metto la classe giusta alla griglia
@@ -79,7 +94,7 @@ function startGame (event) {
         //colorariamo la cella al click e facciamo un log del suo numero e aumentiamo lo score
         cell.addEventListener('click', function() {
             //se è già cliccata ferma tutto
-            if(cell.classList.contains('clicked')) return;
+            if(isOver === true || cell.classList.contains('clicked')) return;
 
             //aggiungi la classe cliccata
             cell.classList.add('clicked');
@@ -89,13 +104,14 @@ function startGame (event) {
             //se è presente una bomba...
             if(bombs.includes(cellNumber)) {
                 cell.classList.add('bomb');
-                console.log(`Hai Perso! il tuo punteggio è di ${score}`);
+                endGame(score);
             } else {
                 //aumento il punteggio di uno e stampalo in pagina
                 score = ++score;
                 scoreCounter.innerText = score;    
             }
 
+            if(maxScore === score) endGame(score, true);
         })
     
         // # Fase di output
