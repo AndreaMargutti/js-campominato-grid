@@ -29,7 +29,6 @@ function getRandomNumber (totalBombs, totalCells) {
     return bombs;
 }
 
-
 //funzione di end game
 function endGame (score, bombs, hasWon = false,) {
     let result;
