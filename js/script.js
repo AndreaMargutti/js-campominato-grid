@@ -21,7 +21,7 @@ function getRandomNumber (totalBombs, totalCells) {
     //generiamo le bombe
     while(bombs.length < totalBombs){
         const randomNumber = Math.floor(Math.random() * totalCells + 1);
-        bombs.push(randomNumber);
+        if(!bombs.includes(randomNumber)) bombs.push(randomNumber);
     }
     
     //tiro fuori l'array di bombe
@@ -32,7 +32,6 @@ function getRandomNumber (totalBombs, totalCells) {
 function startGame (event) {
     event.preventDefault();
 
-    
     //# Fase di elaborazione
     let rows = 10;
     let cols = 10;
@@ -65,6 +64,7 @@ function startGame (event) {
     //cambia il bottone in 'ricomincia'
     playBtn.innerText = 'ricomincia'
 
+    //genero le bombe
     const bombs = getRandomNumber(totalBombs, totalCells);
     console.log(bombs);
 
@@ -72,21 +72,31 @@ function startGame (event) {
         //genero cento celle
         const cell = createCell();
         
-        //colorariamo la cella al click e facciamo un log del suo numero
-        cell.addEventListener('click', function() {
-            if(!cell.classList.contains('clicked')){
-                cell.classList.add('clicked');
-                console.log(cellNumber)
-                score = ++score;
-                scoreCounter.innerText = score;
-            } else {
-                return;
-            }
-        })
-    
         //inserire il numero nella cella
-        const cellNumber = i;
-        cell.innerText = cellNumber + 1;
+        const cellNumber = i + 1;
+        cell.innerText = cellNumber;
+        
+        //colorariamo la cella al click e facciamo un log del suo numero e aumentiamo lo score
+        cell.addEventListener('click', function() {
+            //se è già cliccata ferma tutto
+            if(cell.classList.contains('clicked')) return;
+
+            //aggiungi la classe cliccata
+            cell.classList.add('clicked');
+            //logga il numero della cella
+            console.log(cellNumber)
+            
+            //se è presente una bomba...
+            if(bombs.includes(cellNumber)) {
+                cell.classList.add('bomb');
+                console.log(`Hai Perso! il tuo punteggio è di ${score}`);
+            } else {
+                //aumento il punteggio di uno e stampalo in pagina
+                score = ++score;
+                scoreCounter.innerText = score;    
+            }
+
+        })
     
         // # Fase di output
         //inserisco le celle nella griglia
