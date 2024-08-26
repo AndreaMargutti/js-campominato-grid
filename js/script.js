@@ -10,8 +10,11 @@ let isOver = false;
 // # Funzioni
 //funzione per creare una cella
 function createCell () {
+    //recupero il div
     const cell = document.createElement('div');
+    //aggiungo una cella
     cell.classList.add('cell');
+    //la restituisco
     return cell;
 }
 
@@ -22,6 +25,7 @@ function getRandomNumber (totalBombs, totalCells) {
     //generiamo le bombe
     while(bombs.length < totalBombs){
         const randomNumber = Math.floor(Math.random() * totalCells + 1);
+        //se non è già presente il numero pusho il numero nell'array
         if(!bombs.includes(randomNumber)) bombs.push(randomNumber);
     }
     
@@ -31,13 +35,16 @@ function getRandomNumber (totalBombs, totalCells) {
 
 //funzione di end game
 function endGame (score, bombs, hasWon = false,) {
+    //creo variabile per centralizzare il log del risultato
     let result;
     if(hasWon){
         result = 'vinto'
     } else {
         result = 'perso'
     }
+    //invio il messaggio
     alert(`Hai ${result}! Il tuo punteggio è di ${score}`);
+
     isOver = true;
     
     // # coloriamo tutte le celle a fine partita
@@ -59,9 +66,11 @@ function endGame (score, bombs, hasWon = false,) {
 
 //funzione di inizio giocp
 function startGame (event) {
+    // ! prevengo l'invio e successivmento ricaricamento del form
     event.preventDefault();
 
     //# Fase di elaborazione
+    //riporto il finale a falso
     isOver = false;
     let rows = 10;
     let cols = 10;
@@ -84,10 +93,10 @@ function startGame (event) {
     const totalCells = rows * cols
     const totalBombs = 16;
     const maxScore = totalCells - totalBombs;
-            
-    //metto la classe corrispondente alla girglia
-    //metto la classe giusta alla griglia
+    
+    //rimuovo eventuali classi proveniente da partite precedenti
     grid.classList.remove('hard', 'normal', 'easy');
+    //metto la classe corrispondente al livello di difficoltà alla girglia
     grid.classList.add(level);
         
     //svuoto la griglia
@@ -97,7 +106,6 @@ function startGame (event) {
 
     //genero le bombe
     const bombs = getRandomNumber(totalBombs, totalCells);
-    console.log(bombs);
 
     for(let i = 0; i < totalCells; i++) {
         //genero cento celle
@@ -105,7 +113,6 @@ function startGame (event) {
         
         //inserire il numero nella cella
         const cellNumber = i + 1;
-        
         cell.innerText = cellNumber;
         
         //colorariamo la cella al click e facciamo un log del suo numero e aumentiamo lo score
@@ -120,6 +127,7 @@ function startGame (event) {
             
             //se è presente una bomba...
             if(bombs.includes(cellNumber)) {
+                //..fai comparire la bomba e ferma la partita
                 cell.classList.add('bomb');
                 endGame(score, bombs);
             } else {
@@ -127,7 +135,7 @@ function startGame (event) {
                 score = ++score;
                 scoreCounter.innerText = score;    
             }
-            
+            //se fai il punteggio massimo ferma la partita
             if(maxScore === score) endGame(score, bombs, true);
         })
 
