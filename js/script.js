@@ -14,6 +14,20 @@ function createCell () {
     return cell;
 }
 
+//funzione per creare le bombe casualmente
+function getRandomNumber (totalBombs, totalCells) {
+    //creo l'array di bombe
+    const bombs = [];
+    //generiamo le bombe
+    while(bombs.length < totalBombs){
+        const randomNumber = Math.floor(Math.random() * totalCells + 1);
+        bombs.push(randomNumber);
+    }
+    
+    //tiro fuori l'array di bombe
+    return bombs;
+}
+
 //funzione di inizio giocp
 function startGame (event) {
     event.preventDefault();
@@ -39,6 +53,7 @@ function startGame (event) {
     }
             
     const totalCells = rows * cols
+    const totalBombs = 16;
             
     //metto la classe corrispondente alla girglia
     //metto la classe giusta alla griglia
@@ -49,6 +64,9 @@ function startGame (event) {
     grid.innerHTML = '';
     //cambia il bottone in 'ricomincia'
     playBtn.innerText = 'ricomincia'
+
+    const bombs = getRandomNumber(totalBombs, totalCells);
+    console.log(bombs);
 
     for(let i = 0; i < totalCells; i++) {
         //genero cento celle
