@@ -13,13 +13,10 @@ function createCell () {
     return cell;
 }
 
-
-//# Fase di elaborazione
-//generare le celle al click del bottone
-form.addEventListener('submit', function(event) {
-    //prevengo il caricamento
+//funzione di inizio giocp
+function startGame (event) {
     event.preventDefault();
-    
+    //# Fase di elaborazione
     let rows = 10;
     let cols = 10;
 
@@ -64,4 +61,6 @@ form.addEventListener('submit', function(event) {
         //inserisco le celle nella griglia
         grid.appendChild(cell);
     }
-})
+}    
+
+form.addEventListener('submit', startGame);
