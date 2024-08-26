@@ -60,6 +60,8 @@ function endGame (score, bombs, hasWon = false,) {
         //se corrisponde ad una bomba aggiungo la classe bomb
         if(bombs.includes(cellNumber)) {
             cell.classList.add('bomb')
+            //e tolgo il numero
+            cell.innerText = '';
         }
     }
 }
