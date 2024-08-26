@@ -31,7 +31,7 @@ function getRandomNumber (totalBombs, totalCells) {
 
 
 //funzione di end game
-function endGame (score, hasWon = false) {
+function endGame (score, bombs, hasWon = false,) {
     let result;
     if(hasWon){
         result = 'vinto'
@@ -40,6 +40,23 @@ function endGame (score, hasWon = false) {
     }
     console.log(`Hai ${result}! Il tuo punteggio è di ${score}`);
     isOver = true;
+    
+    // # coloriamo tutte le celle a fine partita
+    //recupero le celle
+    const cells = document.querySelectorAll('.cell');
+    console.log(cells);
+    //recupero le singole celle
+    for(let i = 0; i < cells.length; i++){
+        const cell = cells[i];
+        //aggiungo la classe clicked
+        cell.classList.add('clicked');
+        //recupero il numero della cella
+        const cellNumber = i + 1;
+        //se corrisponde ad una bomba aggiungo la classe bomb
+        if(bombs.includes(cellNumber)) {
+            cell.classList.add('bomb')
+        }
+    }
 }
 
 //funzione di inizio giocp
@@ -47,6 +64,7 @@ function startGame (event) {
     event.preventDefault();
 
     //# Fase di elaborazione
+    isOver = false;
     let rows = 10;
     let cols = 10;
     let score = 0;
@@ -66,7 +84,7 @@ function startGame (event) {
     }
             
     const totalCells = rows * cols
-    const totalBombs = 1;
+    const totalBombs = 16;
     const maxScore = totalCells - totalBombs;
             
     //metto la classe corrispondente alla girglia
@@ -89,13 +107,14 @@ function startGame (event) {
         
         //inserire il numero nella cella
         const cellNumber = i + 1;
+        
         cell.innerText = cellNumber;
         
         //colorariamo la cella al click e facciamo un log del suo numero e aumentiamo lo score
         cell.addEventListener('click', function() {
             //se è già cliccata ferma tutto
             if(isOver === true || cell.classList.contains('clicked')) return;
-
+            
             //aggiungi la classe cliccata
             cell.classList.add('clicked');
             //logga il numero della cella
@@ -104,17 +123,16 @@ function startGame (event) {
             //se è presente una bomba...
             if(bombs.includes(cellNumber)) {
                 cell.classList.add('bomb');
-                endGame(score);
+                endGame(score, bombs);
             } else {
                 //aumento il punteggio di uno e stampalo in pagina
                 score = ++score;
                 scoreCounter.innerText = score;    
             }
-
-            if(maxScore === score) endGame(score, true);
+            
+            if(maxScore === score) endGame(score, bombs, true);
         })
-    
-        // # Fase di output
+
         //inserisco le celle nella griglia
         grid.appendChild(cell);
     }
