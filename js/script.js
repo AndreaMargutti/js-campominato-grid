@@ -1,5 +1,6 @@
 // # Fase di preparazione
 //recupero gli elementi dal DOM
+const form = document.querySelector('form');
 const playBtn = document.getElementById('play');
 const grid = document.getElementById('grid');
 const rows = 10;
@@ -14,9 +15,12 @@ function createCell () {
     return cell;
 }
 
+
 //# Fase di elaborazione
 //generare le celle al click del bottone
-playBtn.addEventListener('click', function() {
+form.addEventListener('submit', function(event) {
+    //prevengo il caricamento
+    event.preventDefault();
     //svuoto la griglia
     grid.innerHTML = '';
     for(let i = 0; i < totalCells; i++) {
